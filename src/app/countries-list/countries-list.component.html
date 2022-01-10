@@ -2,7 +2,9 @@
   <h2>Countries: </h2>
   <div>
     <div class="list-group" *ngIf="!isFetching">
-      <a class="list-group-item" *ngFor="let country of countriesName" routerLinkActive="active"
+      <a class="list-group-item" *ngFor="let country of countriesName"
+         [routerLink]="['/countries', country.alpha3Code]"
+         routerLinkActive="active"
       >{{ country.name }}</a>
     </div>
     <div *ngIf="isFetching">

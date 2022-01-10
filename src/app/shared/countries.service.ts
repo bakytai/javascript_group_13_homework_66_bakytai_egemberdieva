@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CountryName } from './countryName.model';
+import { Country } from './country.model';
 
 @Injectable()
 
@@ -31,5 +32,12 @@ export class CountriesService {
         this.countriesFetching.next(false);
       })
 
+  }
+
+  fetchOneCountry(alpha3Code:string) {
+    return this.http.get<Country>(`http://146.185.154.90:8080/restcountries/rest/v2/alpha/${alpha3Code}`).pipe(map((result: Country) => {
+        return new Country(result.name, result.capital, result.flag, result.population, result.languages);
+      })
+    );
   }
 }
